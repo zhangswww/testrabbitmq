@@ -8,7 +8,8 @@ package org.example.rabbitmq.queue.spring.t1;
  */
 public class MyConsumer {
 
-    public void listen() {
-
+    //执行具体的业务方法
+    public void listen(String foo) {
+        System.out.println("消费者:" + foo);
     }
 }

@@ -1,5 +1,8 @@
 package org.example.rabbitmq.queue.spring.t1;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * @Description:
  * @author:张士威
@@ -8,7 +11,19 @@ package org.example.rabbitmq.queue.spring.t1;
  */
 public class SpringMain {
 
-    public static void main(String[] args) {
+//    @Autowired
+//    RabbitTemplate rabbitTemplate;
 
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("rabbitmq-context.xml");
+        RabbitTemplate rabb = applicationContext.getBean(RabbitTemplate.class);
+
+        rabb.convertAndSend("Hello World!");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        applicationContext.destroy();
     }
 }
